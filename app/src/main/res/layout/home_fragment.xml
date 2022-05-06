@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/app_bg"
+    tools:context=".ui.main.home.HomeFragment">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="?attr/actionBarSize"
+       android:background="@color/purple_700">
+
+      <ImageView
+          android:id="@+id/img_app_home"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:background="@drawable/circle_bg"
+          android:padding="8dp"
+          android:layout_marginStart="8dp"
+          android:layout_centerVertical="true"
+          android:src="@drawable/app_img"/>
+
+      <TextView
+          android:id="@+id/tv_app_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"
+          android:layout_toEndOf="@id/img_app_home"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          android:layout_centerVertical="true"
+          android:layout_marginStart="16dp"
+          android:text="@string/terms"/>
+
+      <ImageView
+          android:id="@+id/img_selected"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:layout_alignParentEnd="true"
+          android:layout_centerVertical="true"
+          android:padding="8dp"
+          android:layout_marginEnd="4dp"
+          android:src="@drawable/ic_star" />
+   </RelativeLayout>
+
+   <EditText
+       android:layout_marginStart="16dp"
+       android:layout_marginEnd="16dp"
+       android:hint="@string/search_for_terms"
+       android:layout_width="match_parent"
+       android:drawableEnd="@drawable/ic_search"
+       android:textColor="@color/black"
+       android:layout_marginTop="8dp"
+       android:textColorHint="@color/white"
+       android:drawableTint="@color/white"
+       android:backgroundTint="@color/purple_500"
+       android:layout_height="wrap_content"/>
+
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/rcv_terms"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_marginStart="4dp"
+       android:layout_marginEnd="4dp"
+       tools:listitem="@layout/term_item_rcv"/>
+
+</LinearLayout>
