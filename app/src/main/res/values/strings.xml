@@ -7,4 +7,7 @@
     <string name="abandon">Abandon</string>
     <string name="todo">TODO</string>
     <string name="tanlanganlar">Tanlanganlar</string>
+    <string name="description">Description</string>
+    <string name="add">Add</string>
+    <string name="name">Name</string>
 </resources>

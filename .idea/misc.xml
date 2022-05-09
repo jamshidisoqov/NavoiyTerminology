@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NavoiyTerminology/app/src/main/res/drawable/circle_bg.xml" value="0.17" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NavoiyTerminology/app/src/main/res/drawable/expand_icon.xml" value="0.184" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NavoiyTerminology/app/src/main/res/drawable/ic_close.xml" value="0.184" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NavoiyTerminology/app/src/main/res/drawable/ic_search.xml" value="0.17" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NavoiyTerminology/app/src/main/res/drawable/ic_star.xml" value="0.17" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NavoiyTerminology/app/src/main/res/layout/activity_main.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NavoiyTerminology/app/src/main/res/layout/dialog_add_terms.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NavoiyTerminology/app/src/main/res/layout/fragment_sign_in.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NavoiyTerminology/app/src/main/res/layout/home_fragment.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Jamshid/AndroidStudioProjects/NavoiyTerminology/app/src/main/res/layout/saved_words_fragment.xml" value="0.2526041666666667" />

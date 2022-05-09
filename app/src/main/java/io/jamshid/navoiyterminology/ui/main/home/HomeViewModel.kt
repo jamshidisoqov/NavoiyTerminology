@@ -1,5 +1,7 @@
 package io.jamshid.navoiyterminology.ui.main.home
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.jamshid.navoiyterminology.data.local.entities.Term
@@ -9,7 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val useCases: UseCases) : ViewModel() {
+class HomeViewModel(private val useCases: UseCases,application: Application) : AndroidViewModel(application) {
 
     private var _allTerms:MutableStateFlow<Response<List<Term>>> = MutableStateFlow(Response.Loading())
     val allTerms:StateFlow<Response<List<Term>>> get() = _allTerms
@@ -30,6 +32,18 @@ class HomeViewModel(private val useCases: UseCases) : ViewModel() {
                     }
                 }
             }
+        }
+    }
+
+    fun addTerms(term: Term){
+        viewModelScope.launch {
+            useCases.insertTerm.invoke(term)
+        }
+    }
+
+    fun updateTerm(term: Term){
+        viewModelScope.launch {
+            useCases.updateTerm.invoke(term)
         }
     }
 

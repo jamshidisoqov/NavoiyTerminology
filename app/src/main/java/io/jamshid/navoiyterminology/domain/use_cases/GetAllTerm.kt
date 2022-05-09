@@ -11,7 +11,7 @@ class GetAllTerm(private var dao: TermDao) {
     operator fun invoke(): Flow<Response<List<Term>>> = flow{
         try {
             emit(Response.Loading())
-            val data = dao.getAllTermso()
+            val data = dao.getAllTerms()
             emit(Response.Success(data))
         }catch (e:Exception){
             emit(Response.Error(e.localizedMessage))

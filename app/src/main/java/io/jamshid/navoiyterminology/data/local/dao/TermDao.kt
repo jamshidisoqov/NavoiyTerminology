@@ -16,7 +16,7 @@ interface TermDao {
     suspend fun updateTerm(term: Term)
 
     @Query("SELECT*FROM term")
-    suspend fun getAllTermso(): List<Term>
+    suspend fun getAllTerms(): List<Term>
 
     @Query("SELECT*FROM term WHERE status=1")
     suspend fun getTermsByStatus(): List<Term>

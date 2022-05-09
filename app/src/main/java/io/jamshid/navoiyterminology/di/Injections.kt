@@ -1,7 +1,6 @@
 package io.jamshid.navoiyterminology.di
 
 import androidx.room.Room
-import io.jamshid.navoiyterminology.data.local.dao.TermDao
 import io.jamshid.navoiyterminology.data.local.database.TermDatabase
 import io.jamshid.navoiyterminology.domain.use_cases.*
 import io.jamshid.navoiyterminology.ui.main.home.HomeViewModel
@@ -9,7 +8,6 @@ import io.jamshid.navoiyterminology.ui.main.info.InfoViewModel
 import io.jamshid.navoiyterminology.ui.main.saved.SavedWordsViewModel
 import io.jamshid.navoiyterminology.utils.Constants
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val dataModule = module {
@@ -40,7 +38,7 @@ val useCaseModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { HomeViewModel(get()) }
+    viewModel { HomeViewModel(get(),get()) }
     viewModel { InfoViewModel(get()) }
     viewModel { SavedWordsViewModel(get()) }
 }
