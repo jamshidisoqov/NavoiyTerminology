@@ -4,5 +4,5 @@ import io.jamshid.navoiyterminology.data.local.entities.Term
 
 interface OnItemClickListener {
     fun onClick(pos:Int,status:Boolean):Boolean
-    fun onImageClick(term: Term)
+    fun onImageClick(pos: Int,term: Term)
 }

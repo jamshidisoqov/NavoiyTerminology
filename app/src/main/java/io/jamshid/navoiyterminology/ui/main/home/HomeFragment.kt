@@ -10,7 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import io.jamshid.navoiyterminology.R
 import io.jamshid.navoiyterminology.data.local.entities.Term
 import io.jamshid.navoiyterminology.databinding.DialogAddTermsBinding
@@ -52,7 +54,7 @@ class HomeFragment : Fragment() {
                 return bool
             }
 
-            override fun onImageClick(term: Term) {
+            override fun onImageClick(pos:Int,term: Term) {
                 viewModel.updateTerm(term)
             }
         },requireContext())
@@ -79,10 +81,25 @@ class HomeFragment : Fragment() {
                             false
                         )
                     )
+                    dialog.dismiss()
+                    viewModel.getTerms()
+
                 }
             }
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
+        }
+
+        binding.imgSelected.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_savedWordsFragment)
+        }
+
+        binding.imgAppHome.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_infoFragment)
+        }
+
+        binding.edSearch.addTextChangedListener {
+            viewModel.search(it!!.toString().trim())
         }
 
 

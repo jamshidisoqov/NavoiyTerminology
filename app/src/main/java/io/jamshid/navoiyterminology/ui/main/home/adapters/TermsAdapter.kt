@@ -28,16 +28,21 @@ class TermsAdapter(private val onItemClickListener: OnItemClickListener,private 
                 tvDescriptionTerm.text = term.description
                 if (term.status) {
                     imgTermsStar.setImageResource(R.drawable.ic_fill_star)
+                }else{
+                    imgTermsStar.setImageResource(R.drawable.ic_star)
                 }
+
                 imgTermsStar.setOnClickListener {
-                    onItemClickListener.onImageClick(term.copy(status = !term.status))
+                    onItemClickListener.onImageClick(position,term.copy(status = !term.status))
                     if (term.status) { 
                         imgTermsStar.setImageResource(R.drawable.ic_star)
                     }else{
                         imgTermsStar.setImageResource(R.drawable.ic_fill_star)
                     }
+                    notifyItemChanged(position)
                     termList[position]=term.copy(status = !term.status)
                 }
+
                 imgTermsSelectable.setOnClickListener {
 
                     if (!onItemClickListener.onClick(position,term.status)) {

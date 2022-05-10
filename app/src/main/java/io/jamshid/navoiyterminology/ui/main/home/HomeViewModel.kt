@@ -9,6 +9,7 @@ import io.jamshid.navoiyterminology.domain.models.Response
 import io.jamshid.navoiyterminology.domain.use_cases.UseCases
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val useCases: UseCases,application: Application) : AndroidViewModel(application) {
@@ -44,6 +45,14 @@ class HomeViewModel(private val useCases: UseCases,application: Application) : A
     fun updateTerm(term: Term){
         viewModelScope.launch {
             useCases.updateTerm.invoke(term)
+        }
+    }
+
+    fun search(query:String){
+        viewModelScope.launch {
+            useCases.searchTerm.invoke(query).collectLatest {
+                _allTerms.value =Response.Success(it)
+            }
         }
     }
 

@@ -27,12 +27,14 @@ val useCaseModule = module {
     single { UpdateTerm(get()) }
     single { GetAllTerm(get()) }
     single { GetTermByStatus(get()) }
+    single { SearchTerm(get()) }
     single {
         UseCases(
             insertTerm = get(),
             updateTerm = get(),
             allTerm = get(),
-            getTermByStatus = get()
+            getTermByStatus = get(),
+            searchTerm = get()
         )
     }
 }
