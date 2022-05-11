@@ -13,7 +13,8 @@ import org.koin.dsl.module
 val dataModule = module {
 
     single {
-        Room.databaseBuilder(get(), TermDatabase::class.java, Constants.DB_NAME).build()
+        Room.databaseBuilder(get(), TermDatabase::class.java, Constants.DB_NAME).createFromAsset("tt_nav.db")
+             .fallbackToDestructiveMigration().build()
     }
 
     single {

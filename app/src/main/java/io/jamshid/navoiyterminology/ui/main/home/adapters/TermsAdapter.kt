@@ -3,6 +3,7 @@ package io.jamshid.navoiyterminology.ui.main.home.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,38 +25,40 @@ class TermsAdapter(private val onItemClickListener: OnItemClickListener,private 
         @RequiresApi(Build.VERSION_CODES.Q)
         fun onBind(position: Int, term: Term) {
             binding.apply {
-                tvNameTerm.text = term.name
+                tvNameTerm.text = term.name!!.indexOfInsertCharacter()
                 tvDescriptionTerm.text = term.description
-                if (term.status) {
+                if (term.status!!) {
                     imgTermsStar.setImageResource(R.drawable.ic_fill_star)
                 }else{
                     imgTermsStar.setImageResource(R.drawable.ic_star)
                 }
 
                 imgTermsStar.setOnClickListener {
-                    onItemClickListener.onImageClick(position,term.copy(status = !term.status))
-                    if (term.status) { 
+                    onItemClickListener.onImageClick(position,term.copy(status = !term.status!!))
+                    if (term.status!!) {
                         imgTermsStar.setImageResource(R.drawable.ic_star)
                     }else{
                         imgTermsStar.setImageResource(R.drawable.ic_fill_star)
                     }
                     notifyItemChanged(position)
-                    termList[position]=term.copy(status = !term.status)
+                    termList[position]=term.copy(status = !term.status!!)
                 }
 
                 imgTermsSelectable.setOnClickListener {
 
-                    if (!onItemClickListener.onClick(position,term.status)) {
+                    if (!onItemClickListener.onClick(position, term.status!!)) {
                         binding.apply {
                             imgTermsSelectable.setImageResource(R.drawable.ic_close)
                             tvDescriptionTerm.visibility = View.VISIBLE
                             line1.visibility = View.VISIBLE
                             imgTermsStar.visibility = View.VISIBLE
+                            tvNameTerm.isSingleLine=false
                         }
                     } else {
                         imgTermsSelectable.setImageResource(R.drawable.ic_add)
                         tvDescriptionTerm.visibility = View.GONE
                         line1.visibility = View.GONE
+                        tvNameTerm.isSingleLine=true
                         imgTermsStar.visibility = View.GONE
                     }
                 }
@@ -83,4 +86,17 @@ class TermsAdapter(private val onItemClickListener: OnItemClickListener,private 
         termList = list as ArrayList<Term>
         notifyDataSetChanged()
     }
+}
+
+private fun String.indexOfInsertCharacter(): String {
+
+    var ind = this.indexOf(',')
+    val builder = StringBuilder()
+    builder.append(this)
+    if (ind>-1){
+        builder.insert(ind,' ')
+        builder.insert(ind+2,' ')
+    }
+    return  builder.toString()
+
 }
