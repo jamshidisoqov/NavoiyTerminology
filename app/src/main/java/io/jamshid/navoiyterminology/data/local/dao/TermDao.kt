@@ -2,7 +2,6 @@ package io.jamshid.navoiyterminology.data.local.dao
 
 import androidx.room.*
 import io.jamshid.navoiyterminology.data.local.entities.Term
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TermDao {
@@ -13,7 +12,7 @@ interface TermDao {
     @Update(entity = Term::class)
     suspend fun updateTerm(term: Term)
 
-    @Query("SELECT*FROM term ORDER BY term.name")
+    @Query("SELECT*FROM term ORDER BY lower(term.name)")
     suspend fun getAllTerms(): List<Term>
 
     @Query("SELECT*FROM term WHERE status=1")
