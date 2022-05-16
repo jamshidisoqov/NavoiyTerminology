@@ -37,7 +37,7 @@ class SavedWordsFragment : Fragment() {
         viewModel.getSavedTerms()
 
         adapter = TermsAdapter(object : OnItemClickListener{
-            override fun onClick(pos: Int, status: Boolean): Boolean {
+            override fun onClick(pos: Int): Boolean {
                 val bool=Constants.current.contains(pos)
                 if(bool){
                     Constants.current.remove(pos)
@@ -52,7 +52,7 @@ class SavedWordsFragment : Fragment() {
                 viewModel.updateTerm(term)
                 viewModel.getSavedTerms()
             }
-        },requireContext())
+        })
 
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {

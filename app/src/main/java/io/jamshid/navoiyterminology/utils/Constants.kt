@@ -2,8 +2,8 @@ package io.jamshid.navoiyterminology.utils
 
 object Constants {
 
-    const val DB_VERSION=5
-    const val DB_NAME="ter.db"
+    const val DB_VERSION=41
+    const val DB_NAME="navoi.db"
     var current = HashSet<Int>()
 
 }

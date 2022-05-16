@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         viewModel.getTerms()
 
         adapter = TermsAdapter(object : OnItemClickListener {
-            override fun onClick(pos: Int, status: Boolean): Boolean {
+            override fun onClick(pos: Int): Boolean {
                 val bool=Constants.current.contains(pos)
                 if(bool){
                     Constants.current.remove(pos)
@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
             override fun onImageClick(pos:Int,term: Term) {
                 viewModel.updateTerm(term)
             }
-        },requireContext())
+        })
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.allTerms.collectLatest {
@@ -65,6 +65,22 @@ class HomeFragment : Fragment() {
                     adapter.setData(it.data!!)
             }
         }
+
+
+        binding.imgSelected.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_savedWordsFragment)
+        }
+
+        binding.imgAppHome.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_infoFragment)
+        }
+
+        binding.edSearch.addTextChangedListener {
+            viewModel.search(it!!.toString().trim())
+        }
+
+
+        binding.rcvTerms.adapter = adapter
 
         binding.imgAddTerms.setOnClickListener {
             val dialog = Dialog(requireContext())
@@ -89,21 +105,6 @@ class HomeFragment : Fragment() {
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
         }
-
-        binding.imgSelected.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_savedWordsFragment)
-        }
-
-        binding.imgAppHome.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_infoFragment)
-        }
-
-        binding.edSearch.addTextChangedListener {
-            viewModel.search(it!!.toString().trim())
-        }
-
-
-        binding.rcvTerms.adapter = adapter
 
 
 

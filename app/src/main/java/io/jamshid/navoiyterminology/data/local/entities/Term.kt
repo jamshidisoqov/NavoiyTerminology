@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "term")
 data class Term(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int,
+    @PrimaryKey(autoGenerate = false)
+    var id: Int?=null,
     var name: String?=null,
     var description: String?=null,
-    var status: Boolean? = null
+    var status: Boolean?=null
 )

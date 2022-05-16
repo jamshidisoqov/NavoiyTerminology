@@ -13,14 +13,14 @@ interface TermDao {
     @Update(entity = Term::class)
     suspend fun updateTerm(term: Term)
 
-    @Query("SELECT*FROM term")
+    @Query("SELECT*FROM term ORDER BY term.name")
     suspend fun getAllTerms(): List<Term>
 
     @Query("SELECT*FROM term WHERE status=1")
     suspend fun getTermsByStatus(): List<Term>
 
     @Transaction
-    @Query("SELECT*FROM term WHERE name like '%' ||:query||'%'")
+    @Query("SELECT*FROM term WHERE name like :query||'%' ORDER BY term.name")
     suspend fun searchByChapter(query: String): List<Term>
 
 }

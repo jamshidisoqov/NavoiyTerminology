@@ -1,20 +1,19 @@
 package io.jamshid.navoiyterminology.ui.main.home.adapters
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Build
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import io.jamshid.navoiyterminology.R
 import io.jamshid.navoiyterminology.data.local.entities.Term
 import io.jamshid.navoiyterminology.databinding.TermItemRcvBinding
 import io.jamshid.navoiyterminology.utils.OnItemClickListener
 
-class TermsAdapter(private val onItemClickListener: OnItemClickListener,private val ctx:Context) :
+class TermsAdapter(private val onItemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<TermsAdapter.ViewHolder>() {
 
     private var termList: ArrayList<Term> = ArrayList()
@@ -25,40 +24,43 @@ class TermsAdapter(private val onItemClickListener: OnItemClickListener,private 
         @RequiresApi(Build.VERSION_CODES.Q)
         fun onBind(position: Int, term: Term) {
             binding.apply {
-                tvNameTerm.text = term.name!!.indexOfInsertCharacter()
+                tvNameTerm.text = term.name!!.indexOfInsertCharacter().uppercase()
                 tvDescriptionTerm.text = term.description
                 if (term.status!!) {
                     imgTermsStar.setImageResource(R.drawable.ic_fill_star)
-                }else{
+                } else {
                     imgTermsStar.setImageResource(R.drawable.ic_star)
                 }
 
                 imgTermsStar.setOnClickListener {
-                    onItemClickListener.onImageClick(position,term.copy(status = !term.status!!))
+                    onItemClickListener.onImageClick(
+                        position,
+                        term.copy(status = !term.status!!)
+                    )
                     if (term.status!!) {
                         imgTermsStar.setImageResource(R.drawable.ic_star)
-                    }else{
+                    } else {
                         imgTermsStar.setImageResource(R.drawable.ic_fill_star)
                     }
                     notifyItemChanged(position)
-                    termList[position]=term.copy(status = !term.status!!)
+                    termList[position] = term.copy(status = !term.status!!)
                 }
 
                 imgTermsSelectable.setOnClickListener {
 
-                    if (!onItemClickListener.onClick(position, term.status!!)) {
+                    if (onItemClickListener.onClick(position)) {
                         binding.apply {
                             imgTermsSelectable.setImageResource(R.drawable.ic_close)
                             tvDescriptionTerm.visibility = View.VISIBLE
                             line1.visibility = View.VISIBLE
                             imgTermsStar.visibility = View.VISIBLE
-                            tvNameTerm.isSingleLine=false
+                            tvNameTerm.isSingleLine = false
                         }
                     } else {
                         imgTermsSelectable.setImageResource(R.drawable.ic_add)
                         tvDescriptionTerm.visibility = View.GONE
                         line1.visibility = View.GONE
-                        tvNameTerm.isSingleLine=true
+                        tvNameTerm.isSingleLine = true
                         imgTermsStar.visibility = View.GONE
                     }
                 }
@@ -90,13 +92,13 @@ class TermsAdapter(private val onItemClickListener: OnItemClickListener,private 
 
 private fun String.indexOfInsertCharacter(): String {
 
-    var ind = this.indexOf(',')
+    val ind = this.indexOf(',')
     val builder = StringBuilder()
     builder.append(this)
-    if (ind>-1){
-        builder.insert(ind,' ')
-        builder.insert(ind+2,' ')
+    if (ind > -1) {
+        builder.insert(ind, ' ')
+        builder.insert(ind + 2, ' ')
     }
-    return  builder.toString()
+    return builder.toString()
 
 }
