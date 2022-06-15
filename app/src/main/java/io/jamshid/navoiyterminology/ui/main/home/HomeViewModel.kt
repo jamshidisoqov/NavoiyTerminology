@@ -2,7 +2,6 @@ package io.jamshid.navoiyterminology.ui.main.home
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.jamshid.navoiyterminology.data.local.entities.Term
 import io.jamshid.navoiyterminology.domain.models.Response
@@ -13,11 +12,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val useCases: UseCases,application: Application) : AndroidViewModel(application) {
-
     private var _allTerms:MutableStateFlow<Response<List<Term>>> = MutableStateFlow(Response.Loading())
     val allTerms:StateFlow<Response<List<Term>>> get() = _allTerms
-
-
     fun getTerms(){
         viewModelScope.launch {
             useCases.allTerm.invoke().collect{
@@ -35,7 +31,6 @@ class HomeViewModel(private val useCases: UseCases,application: Application) : A
             }
         }
     }
-
     fun addTerms(term: Term){
         viewModelScope.launch {
             useCases.insertTerm.invoke(term)
@@ -47,7 +42,6 @@ class HomeViewModel(private val useCases: UseCases,application: Application) : A
             useCases.updateTerm.invoke(term)
         }
     }
-
     fun search(query:String){
         viewModelScope.launch {
             useCases.searchTerm.invoke(query).collectLatest {
@@ -55,5 +49,4 @@ class HomeViewModel(private val useCases: UseCases,application: Application) : A
             }
         }
     }
-
 }
